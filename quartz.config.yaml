@@ -56,6 +56,20 @@ plugins:
   # CONTENT PROCESSING
   # ---------------------------------------------------------------------------
 
+  - source: "@quartz-community/note-properties"
+    enabled: true
+    options:
+      includeAll: false
+      includedProperties:
+        - description
+        - tags
+        - aliases
+      excludedProperties: []
+      hidePropertiesView: true
+      delimiters: "---"
+      language: yaml
+    order: 5
+
   - source: "@quartz-community/created-modified-date"
     enabled: true
     options:
@@ -107,6 +121,7 @@ plugins:
     layout:
       position: right
       priority: 30
+      condition: not-index
 
   - source: "@quartz-community/crawl-links"
     enabled: true
@@ -241,6 +256,7 @@ plugins:
     layout:
       position: beforeBody
       priority: 20
+      condition: not-index
 
   - source: "@quartz-community/tag-list"
     enabled: false

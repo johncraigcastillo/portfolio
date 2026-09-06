@@ -1,3 +1,159 @@
 @use "./variables.scss" as *;
 
 // put your custom CSS here!
+
+/* Sidebar */
+
+.page-title {
+  font-size: 1.35rem;
+  line-height: 1.15;
+  max-width: 15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.left.sidebar {
+  border-right: 1px solid var(--lightgray);
+}
+
+.explorer {
+  margin-top: 0.75rem;
+}
+
+.explorer .folder-container {
+  font-size: 0.95rem;
+}
+
+.explorer a {
+  opacity: 0.86;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.explorer a:hover {
+  opacity: 1;
+  color: var(--secondary);
+}
+
+/* Homepage hero */
+
+article h1:first-of-type {
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+  margin-bottom: 0.5rem;
+}
+
+article > p:first-of-type strong {
+  font-size: 1.05rem;
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+article {
+  max-width: 860px;
+  line-height: 1.7;
+}
+
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-weight: 750;
+}
+
+h2 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  margin-top: 1.75rem;
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--tertiary);
+}
+
+.callout[data-callout="info"] {
+  padding: 1.25rem 1.4rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--light) 95%, var(--secondary) 5%);
+  border: 1px solid var(--lightgray);
+  box-shadow: none;
+}
+
+.callout[data-callout="info"] a {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 6px;
+  background: var(--secondary);
+  color: var(--light);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.callout[data-callout="info"] a {
+  background: color-mix(in srgb, var(--secondary) 85%, var(--dark) 15%);
+}
+
+.callout[data-callout="info"] a:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+
+.callout[data-callout="info"] ul {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.focus-card {
+  border: 1px solid var(--lightgray);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  background: color-mix(in srgb, var(--light) 97%, var(--secondary) 3%);
+}
+
+.focus-card h3 {
+  margin-top: 0;
+}
+
+.focus-card ul {
+  margin-bottom: 0;
+}
+
+.focus-card ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.focus-card li {
+  margin: 0.3rem 0;
+}
+
+@media (max-width: 700px) {
+  .focus-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+footer p:first-child {
+  display: none;
+}

@@ -1,24 +1,65 @@
 ---
-title: Welcome to Quartz
+title: John Craig Castillo
+description: IT support, systems administration, and cybersecurity portfolio.
 ---
-# John Craig Castillo
 
-IT Support | Systems Administration | Cybersecurity
+**IT Support · Systems Administration · Cybersecurity**
 
-This portfolio documents my hands-on work in systems administration, networking, identity management, automation, and security operations.
+I document hands-on work in enterprise infrastructure, Windows and Linux administration, networking, identity management, automation, and security operations.
 
-## Featured Project
+> [!info] Featured Project
+> ## Mystery Inc Enterprise IT & Security Lab
+>
+> A segmented enterprise home-lab environment built to develop practical experience with:
+>
+> - Windows Server and Active Directory
+> - Linux administration
+> - Networking and OPNsense
+> - PowerShell and automation
+> - Backup and recovery
+> - Security monitoring
+> - Incident response
+>
+> [View the project →](projects/mystery-inc-enterprise-lab/index)
 
-### Mystery Inc Enterprise IT & Security Lab
+## Areas of Focus
 
-A segmented home-lab environment built to develop practical experience with:
+<div class="focus-grid">
 
-- Windows Server and Active Directory
+<div class="focus-card">
+
+### Systems Administration
+
+- Active Directory
+- Windows Server
 - Linux administration
-- Networking and OPNsense
-- PowerShell and automation
-- Backup and recovery
+- DNS / DHCP
+- PowerShell
+- Networking
+
+</div>
+
+<div class="focus-card">
+
+### Security
+
 - Security monitoring
 - Incident response
+- Detection engineering
+- Vulnerability management
+- Endpoint security
+- Packet analysis
 
-[[projects/mystery-inc-enterprise-lab/index|View the project]]
+</div>
+
+</div>
+
+## About
+
+I currently work in application support and am building practical experience in systems administration, infrastructure, and cybersecurity through an authorized enterprise home lab.
+
+My current focus is Windows Server, Active Directory, Linux administration, networking, PowerShell, and security operations.
+
+## Links
+
+- [GitHub](https://github.com/johncraigcastillo)
