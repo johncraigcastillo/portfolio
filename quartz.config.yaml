@@ -131,16 +131,9 @@ plugins:
   - source: "@quartz-themes/core"
     enabled: true
     options:
-      theme: default
-      mode: both
-  - source:
-      name: quartz-themes
-      repo: https://github.com/saberzero1/quartz-themes.git
-      subdir: plugin
-    enabled: true
-    options:
-      theme: obsidian-gruvbox
-      mode: both
+      theme: tokyo-night
+      mode: dark
+    order: 10
   - source: "@quartz-community/remove-draft"
     enabled: true
   - source: "@quartz-community/explicit-publish"
@@ -253,12 +246,6 @@ plugins:
       position: left
       priority: 25
       display: mobile-only
-  - source: https://github.com/saberzero1/quartz-themes.git
-    enabled: true
-    options:
-      theme: tokyo-night
-      mode: both
-    order: 10
 layout:
   groups:
     toolbar:

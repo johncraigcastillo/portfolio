@@ -27,6 +27,8 @@ The Mystery Inc Enterprise IT & Security Lab runs locally on an Arch Linux host 
 | Automation                | PowerShell, Bash, Python               |
 | Network analysis          | Wireshark                              |
 | Future network monitoring | Suricata, Zeek                         |
+
+
 ## Design Notes
 
 - OPNsense routes traffic between the lab networks.
