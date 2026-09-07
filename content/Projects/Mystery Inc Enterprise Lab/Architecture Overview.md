@@ -7,29 +7,7 @@ The Mystery Inc Enterprise IT & Security Lab runs locally on an Arch Linux host 
 
 ## Architecture
 
-```mermaid
-flowchart TB
-    NAT["Host NAT / Internet"] --> FW["OPNsense"]
-
-    FW --> CORP["CORP<br/>10.10.10.0/24"]
-    FW --> DMZ["DMZ<br/>10.10.20.0/24"]
-    FW --> SEC["SECURITY<br/>10.10.30.0/24"]
-    FW --> ATTACK["ATTACK<br/>10.10.40.0/24"]
-
-    CORP --> DC["DC01<br/>Windows Server<br/>AD DS + DNS"]
-    CORP --> WKS["WKSTN01<br/>Windows 11"]
-
-    DMZ --> WEB["WEB01<br/>Ubuntu Server"]
-
-    SEC --> SPLUNK["SPLUNK01<br/>Splunk"]
-
-    ATTACK --> KALI["KALI01<br/>Kali Linux"]
-
-    DC -. Windows logs .-> SPLUNK
-    WKS -. Windows / Sysmon logs .-> SPLUNK
-    WEB -. Linux logs .-> SPLUNK
-    FW -. Firewall logs .-> SPLUNK
-```
+![[mystery-inc-design.png]]
 
 ## Technology
 

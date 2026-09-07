@@ -20,7 +20,7 @@ I document hands-on work in enterprise infrastructure, Windows and Linux adminis
 > - Security monitoring
 > - Incident response
 >
-> [View the project →](projects/mystery-inc-enterprise-lab/index)
+> [[Projects/Mystery Inc Enterprise Lab/index|View the project →]]
 
 ## Areas of Focus
 

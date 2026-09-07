@@ -2,77 +2,6 @@
 
 // put your custom CSS here!
 
-/* Sidebar */
-
-.page-title {
-  font-size: 1.35rem;
-  line-height: 1.15;
-  max-width: 15rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.left.sidebar {
-  border-right: 1px solid var(--lightgray);
-}
-
-.explorer {
-  margin-top: 0.75rem;
-}
-
-.explorer .folder-container {
-  font-size: 0.95rem;
-}
-
-.explorer a {
-  opacity: 0.86;
-  transition: opacity 0.15s ease, color 0.15s ease;
-}
-
-.explorer a:hover {
-  opacity: 1;
-  color: var(--secondary);
-}
-
-/* Homepage hero */
-
-article h1:first-of-type {
-  font-size: clamp(2.2rem, 4vw, 3.4rem);
-  line-height: 1.05;
-  margin-bottom: 0.5rem;
-}
-
-article > p:first-of-type strong {
-  font-size: 1.05rem;
-  color: var(--secondary);
-  font-weight: 600;
-}
-
-article {
-  max-width: 860px;
-  line-height: 1.7;
-}
-
-
-h1,
-h2,
-h3 {
-  letter-spacing: -0.02em;
-}
-
-h1 {
-  font-weight: 750;
-}
-
-h2 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-h3 {
-  margin-top: 1.75rem;
-}
-
 a {
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
@@ -156,4 +85,27 @@ a:hover {
 
 footer p:first-child {
   display: none;
+}
+
+/* Images */
+
+article img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Large portfolio skills graph */
+
+.graph-outer {
+  width: 100%;
+  height: 70vh;
+  min-height: 600px;
+  margin-top: 1.5rem;
+}
+
+.graph-container {
+  width: 100%;
+  height: 100%;
 }

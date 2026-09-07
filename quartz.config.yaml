@@ -270,6 +270,34 @@ plugins:
       position: beforeBody
       priority: 5
       condition: not-index
+      
+  - source: "@quartz-community/graph"
+    enabled: true
+    options:
+      localGraph:
+        drag: true
+        zoom: true
+        depth: -1
+        scale: 1.1
+        repelForce: 0.25
+        centerForce: 0.45
+        linkDistance: 18
+        fontSize: 1.15
+        opacityScale: 1
+        showTags: true
+        removeTags:
+          - skills-map
+        focusOnHover: true
+        enableRadial: false
+      globalGraph:
+        drag: true
+        zoom: true
+        depth: -1
+        showTags: true
+    layout:
+      position: afterBody
+      priority: 10
+      condition: skills-map
 
   # ---------------------------------------------------------------------------
   # FOOTER
