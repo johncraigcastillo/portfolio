@@ -1,24 +1,32 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
+
 configuration:
   pageTitle: John Craig Castillo
   pageTitleSuffix: " | IT & Security Portfolio"
+
   enableSPA: true
   enablePopovers: true
+
   analytics:
     provider: plausible
+
   locale: en-US
   baseUrl: johncraigcastillo.github.io/portfolio
+
   ignorePatterns:
     - private
     - templates
     - .obsidian
+
   theme:
     fontOrigin: googleFonts
     cdnCaching: true
+
     typography:
       header: Schibsted Grotesk
       body: Source Sans Pro
       code: IBM Plex Mono
+
     colors:
       lightMode:
         light: "#f8fafc"
@@ -30,6 +38,7 @@ configuration:
         tertiary: "#0f766e"
         highlight: rgba(37, 99, 235, 0.10)
         textHighlight: "#fde68a"
+
       darkMode:
         light: "#0f1117"
         lightgray: "#252a34"
@@ -40,7 +49,13 @@ configuration:
         tertiary: "#5eead4"
         highlight: rgba(96, 165, 250, 0.12)
         textHighlight: "#854d0e"
+
 plugins:
+
+  # ---------------------------------------------------------------------------
+  # CONTENT PROCESSING
+  # ---------------------------------------------------------------------------
+
   - source: "@quartz-community/note-properties"
     enabled: true
     options:
@@ -51,9 +66,10 @@ plugins:
         - aliases
       excludedProperties: []
       hidePropertiesView: true
-      delimiters: ---
+      delimiters: "---"
       language: yaml
     order: 5
+
   - source: "@quartz-community/created-modified-date"
     enabled: true
     options:
@@ -63,6 +79,7 @@ plugins:
         - git
         - filesystem
     order: 10
+
   - source: "@quartz-community/syntax-highlighting"
     enabled: true
     options:
@@ -71,6 +88,7 @@ plugins:
         dark: github-dark
       keepBackground: false
     order: 20
+
   - source: "@quartz-community/obsidian-flavored-markdown"
     enabled: true
     options:
@@ -87,13 +105,16 @@ plugins:
       enableVideoEmbed: true
       enableCheckbox: true
     order: 30
+
   - source: "@quartz-community/github-flavored-markdown"
     enabled: true
     order: 40
+
   - source: "@quartz-community/unlisted-pages"
     enabled: true
     options: {}
     order: 45
+
   - source: "@quartz-community/table-of-contents"
     enabled: true
     order: 50
@@ -101,74 +122,103 @@ plugins:
       position: right
       priority: 30
       condition: not-index
+
   - source: "@quartz-community/crawl-links"
     enabled: true
     options:
       markdownLinkResolution: shortest
     order: 60
+
   - source: "@quartz-community/description"
     enabled: true
     order: 70
+
   - source: "@quartz-community/latex"
     enabled: true
     options:
       renderEngine: katex
     order: 80
+
   - source: "@quartz-community/citations"
     enabled: false
     order: 85
+
   - source: "@quartz-community/hard-line-breaks"
     enabled: true
     order: 90
+
   - source: "@quartz-community/ox-hugo"
     enabled: false
     order: 91
+
   - source: "@quartz-community/roam"
     enabled: false
     order: 92
+
+  # ---------------------------------------------------------------------------
+  # THEME / CORE
+  # ---------------------------------------------------------------------------
+
   - source: "@quartz-community/quartz-fonts"
     enabled: true
+
   - source: "@quartz-themes/core"
     enabled: true
     options:
       theme: default
       mode: both
-  - source:
-      name: quartz-themes
-      repo: https://github.com/saberzero1/quartz-themes.git
-      subdir: plugin
-    enabled: true
-    options:
-      theme: obsidian-gruvbox
-      mode: both
+
+  # ---------------------------------------------------------------------------
+  # PUBLISHING
+  # ---------------------------------------------------------------------------
+
   - source: "@quartz-community/remove-draft"
     enabled: true
+
   - source: "@quartz-community/explicit-publish"
     enabled: false
+
   - source: "@quartz-community/alias-redirects"
     enabled: true
+
   - source: "@quartz-community/content-index"
     enabled: true
     options:
       enableSiteMap: true
       enableRSS: false
+
+  # ---------------------------------------------------------------------------
+  # PAGE GENERATION
+  # ---------------------------------------------------------------------------
+
   - source: "@quartz-community/favicon"
     enabled: true
+
   - source: "@quartz-community/og-image"
     enabled: true
+
   - source: "@quartz-community/cname"
     enabled: false
+
   - source: "@quartz-community/content-page"
     enabled: true
+
   - source: "@quartz-community/folder-page"
     enabled: true
+
   - source: "@quartz-community/tag-page"
     enabled: true
+
+  # ---------------------------------------------------------------------------
+  # NAVIGATION
+  # ---------------------------------------------------------------------------
+
   - source: "@quartz-community/explorer"
     enabled: true
     layout:
       position: left
       priority: 50
+
   - source: "@quartz-community/search"
     enabled: true
     layout:
@@ -177,39 +227,50 @@ plugins:
       group: toolbar
       groupOptions:
         grow: true
+
   - source: "@quartz-community/page-title"
     enabled: true
     layout:
       position: left
       priority: 10
+
   - source: "@quartz-community/darkmode"
     enabled: true
     layout:
       position: left
       priority: 30
       group: toolbar
+
+  # ---------------------------------------------------------------------------
+  # PAGE CONTENT
+  # ---------------------------------------------------------------------------
+
   - source: "@quartz-community/article-title"
     enabled: true
     layout:
       position: beforeBody
       priority: 10
+
   - source: "@quartz-community/content-meta"
     enabled: true
     layout:
       position: beforeBody
       priority: 20
       condition: not-index
+
   - source: "@quartz-community/tag-list"
     enabled: false
     layout:
       position: beforeBody
       priority: 30
+
   - source: "@quartz-community/breadcrumbs"
     enabled: true
     layout:
       position: beforeBody
       priority: 5
       condition: not-index
+      
   - source: "@quartz-community/graph"
     enabled: true
     options:
@@ -237,6 +298,11 @@ plugins:
       position: afterBody
       priority: 10
       condition: skills-map
+
+  # ---------------------------------------------------------------------------
+  # FOOTER
+  # ---------------------------------------------------------------------------
+
   - source: "@quartz-community/footer"
     enabled: true
     options:
@@ -245,6 +311,11 @@ plugins:
     layout:
       position: footer
       priority: 50
+
+  # ---------------------------------------------------------------------------
+  # MOBILE SPACING
+  # ---------------------------------------------------------------------------
+
   - source: "@quartz-community/spacer"
     enabled: true
     options: {}
@@ -253,28 +324,27 @@ plugins:
       position: left
       priority: 25
       display: mobile-only
-  - source: https://github.com/saberzero1/quartz-themes.git
-    enabled: true
-    options:
-      theme: tokyo-night
-      mode: both
-    order: 10
+
 layout:
   groups:
     toolbar:
       priority: 35
       direction: row
       gap: 0.5rem
+
   byPageType:
     "404":
       positions:
         beforeBody: []
         left: []
         right: []
+
     content: {}
+
     folder:
       positions:
         right: []
+
     tag:
       positions:
         right: []
