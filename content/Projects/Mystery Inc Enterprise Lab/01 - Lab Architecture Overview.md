@@ -1,5 +1,5 @@
 ---
-title: Architecture Overview
+title: 01 - Lab Architecture Overview
 description: High-level architecture and technology used in the Mystery Inc Enterprise IT & Security Lab.
 ---
 
