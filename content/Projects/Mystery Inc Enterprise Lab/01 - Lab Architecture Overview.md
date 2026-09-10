@@ -36,3 +36,8 @@ The Mystery Inc Enterprise IT & Security Lab runs locally on an Arch Linux host 
 - ATTACK and SECURITY are default-deny unless a specific exercise requires access.
 - Active VM disks stay on the internal NVMe.
 - Backups and installation media are stored on the external SSD.
+
+## What's Next
+
+> [!info] Next Entry
+> [[02 - Removing the Existing CORP Virtual Machines]]

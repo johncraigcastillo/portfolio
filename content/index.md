@@ -62,4 +62,4 @@ My current focus is Windows Server, Active Directory, Linux administration, netw
 
 ## Links
 
-- [GitHub](https://github.com/johncraigcastillo)
+- [LinkedIn](https://www.linkedin.com/in/johncraigc)
