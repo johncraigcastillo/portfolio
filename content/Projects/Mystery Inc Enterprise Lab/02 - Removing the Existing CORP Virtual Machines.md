@@ -162,7 +162,61 @@ I also learned why destructive changes are safer when performed in stages:
 
 ## Current State of Lab
 
-![[dc01-and-wkstn01-removed.png]]
+```mermaid
+---
+config:
+  theme: base
+  themeVariables:
+    darkMode: true
+    background: "#1a1b26"
+    primaryColor: "#24283b"
+    primaryTextColor: "#c0caf5"
+    primaryBorderColor: "#7aa2f7"
+    lineColor: "#7aa2f7"
+    edgeLabelBackground: "#24283b"
+    textColor: "#7dcfff"
+---
+flowchart TB
+
+INET(["Host NAT / Internet"])
+
+OP{{"OPNsense<br/>Firewall / Router"}}
+
+INET --> OP
+
+CORP("CORP<br/>10.10.10.0/24")
+DMZ("DMZ<br/>10.10.20.0/24")
+SEC("SECURITY<br/>10.10.30.0/24")
+ATK("ATTACK<br/>10.10.40.0/24")
+
+OP --> CORP
+OP --> DMZ
+OP --> SEC
+OP --> ATK
+
+DC["DC01<br/>Windows Server<br/>AD DS + DNS<br/>✕ REMOVED"]
+WK["WKSTN01<br/>Windows 11<br/>✕ REMOVED"]
+WEB["WEB01<br/>Ubuntu Server"]
+KALI["KALI01<br/>Kali Linux"]
+
+CORP -.-> DC
+CORP -.-> WK
+DMZ --> WEB
+ATK --> KALI
+
+classDef internet fill:#24283b,stroke:#e0af68,color:#c0caf5,stroke-width:1.5px;
+classDef firewall fill:#24283b,stroke:#9d7cd8,color:#c0caf5,stroke-width:2px;
+classDef network fill:#24283b,stroke:#7aa2f7,color:#c0caf5,stroke-width:1.5px;
+classDef endpoint fill:#24283b,stroke:#9d7cd8,color:#c0caf5,stroke-width:1.5px;
+classDef removed fill:#2a2333,stroke:#e0af68,color:#e0af68,stroke-width:1.5px,stroke-dasharray:6 4;
+
+class INET internet;
+class OP firewall;
+class CORP,DMZ,SEC,ATK network;
+class WEB,KALI endpoint;
+class DC,WK removed;
+```
+
 
 ## Next Step
 

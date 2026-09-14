@@ -167,34 +167,53 @@ At this point, the CORP side of the lab has been mostly dismantled.
 The virtual setup looked like this:
 
 ```mermaid
-flowchart LR
-    DC["DC01"]
-    WK["WKSTN01"]
-    NET["soc-corp<br/>libvirt network"]
-    BR["virbr-corp<br/>Linux bridge"]
-    NIC["OPNsense virtual NIC"]
-    DEV["vtnet1<br/>OPNsense device"]
+flowchart TB
 
-    DC --> NET
-    WK --> NET
-    NET --> BR
-    BR --> NIC
-    NIC --> DEV
+OP{{"OPNsense<br/>CORP virtual NIC"}}
+
+BR[["virbr-corp<br/>Linux bridge"]]
+
+NET("soc-corp<br/>libvirt network")
+
+DC["DC01"]
+WK["WKSTN01"]
+
+OP --> BR
+BR --> NET
+NET --> DC
+NET --> WK
+
+classDef firewall fill:#24283b,stroke:#9d7cd8,color:#c0caf5,stroke-width:2px;
+classDef bridge fill:#24283b,stroke:#9ece6a,color:#c0caf5,stroke-width:1.5px;
+classDef network fill:#24283b,stroke:#7aa2f7,color:#c0caf5,stroke-width:1.5px;
+classDef endpoint fill:#24283b,stroke:#9d7cd8,color:#c0caf5,stroke-width:1.5px;
+
+class OP firewall;
+class BR bridge;
+class NET network;
+class DC,WK endpoint;
 ```
 
 Its physical-world equivalent is roughly:
 
 ```mermaid
-flowchart LR
+flowchart TB
 
+PORT{{"CORP firewall/router interface"}}
+SWITCH("CORP Ethernet switch / network segment")
 SERVER["CORP Server"]
 PC["CORP Workstation"]
-SWITCH["CORP Ethernet switch / network segment"]
-PORT["CORP firewall network port"]
+PORT --> SWITCH
+SWITCH --> SERVER
+SWITCH --> PC
 
-SERVER --> SWITCH
-PC --> SWITCH
-SWITCH --> PORT
+classDef firewall fill:#24283b,stroke:#9d7cd8,color:#c0caf5,stroke-width:2px;
+classDef network fill:#24283b,stroke:#7aa2f7,color:#c0caf5,stroke-width:1.5px;
+classDef endpoint fill:#24283b,stroke:#9d7cd8,color:#c0caf5,stroke-width:1.5px;
+
+class PORT firewall;
+class SWITCH network;
+class SERVER,PC endpoint;
 ```
 
 The important equivalencies are:
@@ -206,28 +225,189 @@ The important equivalencies are:
 
 At this point, the OPNsense CORP virtual NIC has been removed. DC01 and WKSTN01 were already removed previously.
 
+```mermaid
+flowchart TB
+
+OP{{"OPNsense CORP virtual NIC<br/>✕ REMOVED"}}
+
+BR[["virbr-corp<br/>Linux bridge"]]
+
+NET("soc-corp<br/>libvirt network")
+
+DC["DC01<br/>✕ REMOVED"]
+WK["WKSTN01<br/>✕ REMOVED"]
+
+OP -.-> BR
+BR --> NET
+NET -.-> DC
+NET -.-> WK
+
+classDef removed fill:#3a3424,stroke:#e0af68,color:#e0af68,stroke-width:1.5px,stroke-dasharray:5 5;
+classDef bridge fill:#24283b,stroke:#9ece6a,color:#c0caf5,stroke-width:1.5px;
+classDef network fill:#24283b,stroke:#7aa2f7,color:#c0caf5,stroke-width:1.5px;
+
+class OP,DC,WK removed;
+class BR bridge;
+class NET network;
+```
+
 The remaining piece is the unused `soc-corp` network and its `virbr-corp` bridge.
+
+### 6. Removed the `soc-corp` libvirt network
+
+With no VMs left connected to `soc-corp`, I removed the network from libvirt.
+
+```sh
+❯ sudo virsh -c qemu:///system net-destroy soc-corp
+Network soc-corp destroyed
+
+❯ sudo virsh -c qemu:///system net-undefine soc-corp
+Network soc-corp has been undefined
+```
+
+`net-destroy` stopped the active network, while `net-undefine` removed its saved libvirt configuration.
+
+`sudo` was required because these commands changed system-wide libvirt networking.
+
+I then confirmed that `soc-corp` was gone and that the other lab networks were still intact.
+
+```sh
+❯ virsh -c qemu:///system net-list --all
+
+ Name           State    Autostart   Persistent
+-------------------------------------------------
+ default        active   yes         yes
+ soc-attack     active   yes         yes
+ soc-dmz        active   yes         yes
+ soc-security   active   yes         yes
+```
+
+I also confirmed that the Linux bridge used by the network had been removed.
+
+```sh
+❯ ip link show virbr-corp
+Device "virbr-corp" does not exist.
+```
+
+### Current State of Lab
+
+At this point, the old CORP network has been fully removed.
+
+Because this note focuses on the libvirt network layer, the `virbr-*` Linux bridges are included to show how each `soc-*` network is actually implemented on the host.
+
+Now that CORP has been removed, the remaining network looks like this:
+```mermaid
+---
+config:
+  theme: base
+  themeVariables:
+    darkMode: true
+    background: "#1a1b26"
+    primaryColor: "#24283b"
+    primaryTextColor: "#c0caf5"
+    primaryBorderColor: "#7aa2f7"
+    lineColor: "#7aa2f7"
+    edgeLabelBackground: "#24283b"
+    textColor: "#7dcfff"
+---
+flowchart TB
+
+INET(["Host NAT / Internet"])
+
+WAN("default<br/>WAN network<br/>DHCP")
+WANBR[["default bridge"]]
+
+OP{{"OPNsense<br/>Firewall / Router"}}
+
+CORP("soc-corp<br/>CORP<br/>10.10.10.0/24<br/>✕ REMOVED")
+DMZ("soc-dmz<br/>DMZ<br/>10.10.20.0/24")
+SEC("soc-security<br/>SECURITY<br/>10.10.30.0/24")
+ATK("soc-attack<br/>ATTACK<br/>10.10.40.0/24")
+
+CORPBR[["virbr-corp<br/>✕ REMOVED"]]
+DMZBR[["virbr-dmz"]]
+SECBR[["virbr-security"]]
+ATKBR[["virbr-attack"]]
+
+DC["DC01<br/>Windows Server<br/>AD DS + DNS<br/>✕ REMOVED"]
+WK["WKSTN01<br/>Windows 11<br/>✕ REMOVED"]
+WEB["WEB01<br/>Ubuntu Server"]
+KALI["KALI01<br/>Kali Linux"]
+
+INET --> WAN
+WAN --> WANBR
+WANBR --> OP
+
+OP -.-> CORP
+CORP -.-> CORPBR
+CORPBR -.-> DC
+CORPBR -.-> WK
+
+OP --> DMZ
+DMZ --> DMZBR
+DMZBR --> WEB
+
+OP --> SEC
+SEC --> SECBR
+
+OP --> ATK
+ATK --> ATKBR
+ATKBR --> KALI
+
+classDef internet fill:#24283b,stroke:#e0af68,color:#c0caf5,stroke-width:1.5px;
+classDef firewall fill:#24283b,stroke:#9d7cd8,color:#c0caf5,stroke-width:2px;
+classDef network fill:#24283b,stroke:#7aa2f7,color:#c0caf5,stroke-width:1.5px;
+classDef bridge fill:#24283b,stroke:#9ece6a,color:#c0caf5,stroke-width:1.5px;
+classDef endpoint fill:#24283b,stroke:#9d7cd8,color:#c0caf5,stroke-width:1.5px;
+classDef removed fill:#3a3424,stroke:#e0af68,color:#e0af68,stroke-width:1.5px,stroke-dasharray:5 5;
+
+class INET internet;
+class OP firewall;
+class WAN,DMZ,SEC,ATK network;
+class WANBR,DMZBR,SECBR,ATKBR bridge;
+class WEB,KALI endpoint;
+class CORP,CORPBR,DC,WK removed;
+```
+
+
+What is no longer present:
+
+- `soc-corp` — the libvirt network definition for the CORP segment
+- `virbr-corp` — the Linux bridge that carried traffic for the `soc-corp` network
+- OPNsense CORP virtual NIC — the virtual firewall/router interface that connected OPNsense to CORP
+- DC01 — the Windows Server domain controller for the CORP network
+- WKSTN01 — the Windows 11 workstation that was connected to the CORP network
+
+The other lab segments will remain. SECURITY currently has no VM connected to it, but will be added at a later date
 
 ## Verification
 
-How I confirmed the result worked.
+I confirmed that the CORP network had been fully removed while the other lab networks remained intact.
 
-- Command / query:
-- Expected result:
-- Actual result:
+- Command / query: `virsh -c qemu:///system net-list --all`
+- Expected result: `soc-corp` should no longer appear, while `default`, `soc-dmz`, `soc-security`, and `soc-attack` should remain.
+- Actual result: `soc-corp` was no longer listed and the other four networks were still active.
+
+I also checked for the Linux bridge used by the CORP network.
+
+- Command / query: `ip link show virbr-corp`
+- Expected result: the bridge should no longer exist.
+- Actual result: `Device "virbr-corp" does not exist.`
 
 ## Issues and Troubleshooting
 
-What went wrong, what I checked, and how I resolved it.
+After removing the OPNsense `LAN` interface, the WebGUI at `10.10.10.1` became unreachable.
 
-_Omit this section if there were no meaningful issues._
+This happened because `10.10.10.1` was assigned to the CORP interface that had just been removed. The loss of access confirmed that the CORP-side OPNsense configuration was no longer active.
 
 ## What I Learned
 
-- 
-- 
-- 
+- OPNsense interface configuration and libvirt virtual hardware are separate layers. Removing the interface inside OPNsense did not remove the virtual NIC from the VM.
+- A libvirt network such as `soc-corp` is separate from the Linux bridge, `virbr-corp`, that implements it on the host.
+- Network changes are safer when I identify the exact interface, verify attachments, back up configuration, make one change at a time, and confirm the remaining infrastructure afterward.
 
 ## Next Step
 
-What this enables or what I plan to do next.
+Rebuild the CORP network from scratch, starting with the `soc-corp` libvirt network and its Linux bridge.
+
+After the virtual network is recreated, I will reconnect it to OPNsense, configure the CORP interface for `10.10.10.0/24`, validate routing and isolation, and then begin rebuilding DC01 and WKSTN01.

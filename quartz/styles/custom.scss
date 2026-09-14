@@ -175,6 +175,21 @@ pre * {
   font-family: "JetBrains Mono", monospace !important;
 }
 
+.mermaid svg {
+  display: block;
+  margin-inline: auto;
+}
+
+.mermaid .edgeLabel {
+  background: #1f2335 !important;
+  color: #7dcfff !important;
+}
+
+.mermaid .labelBkg {
+  fill: #1f2335 !important;
+}
+
+
 
 
 
