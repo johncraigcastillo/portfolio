@@ -1,11 +1,5 @@
 import { loadQuartzConfig, loadQuartzLayout } from "./quartz/plugins/loader/config-loader"
-import { registerCondition } from "./quartz/plugins/loader/conditions"
 import type { QuartzTransformerPlugin } from "./quartz/plugins/types"
-
-registerCondition("skills-map", (props) => {
-  const tags = props.fileData.frontmatter?.tags
-  return Array.isArray(tags) && tags.includes("skills-map")
-})
 
 const ImageLightboxResources: QuartzTransformerPlugin = () => ({
   name: "ImageLightboxResources",

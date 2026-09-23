@@ -204,7 +204,7 @@ plugins:
       priority: 5
       condition: not-index
   - source: "@quartz-community/graph"
-    enabled: true
+    enabled: false
     options:
       localGraph:
         drag: true

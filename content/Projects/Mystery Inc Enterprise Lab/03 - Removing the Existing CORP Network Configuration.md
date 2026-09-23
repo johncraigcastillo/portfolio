@@ -2,7 +2,7 @@
 title: 03 - Removing the Existing CORP Network Configuration
 date: 2026-09-08
 type: technical-writeup
-status: draft
+status: complete
 tags:
   - portfolio
 ---
@@ -289,7 +289,7 @@ I also confirmed that the Linux bridge used by the network had been removed.
 Device "virbr-corp" does not exist.
 ```
 
-### Current State of Lab
+## Current State of Lab
 
 At this point, the old CORP network has been fully removed.
 
@@ -411,3 +411,7 @@ This happened because `10.10.10.1` was assigned to the CORP interface that had j
 Rebuild the CORP network from scratch, starting with the `soc-corp` libvirt network and its Linux bridge.
 
 After the virtual network is recreated, I will reconnect it to OPNsense, configure the CORP interface for `10.10.10.0/24`, validate routing and isolation, and then begin rebuilding DC01 and WKSTN01.
+
+
+> [!info] Next Entry
+> [[04 - Rebuilding the CORP Network]]

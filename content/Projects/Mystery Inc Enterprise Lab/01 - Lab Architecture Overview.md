@@ -2,11 +2,15 @@
 title: 01 - Lab Architecture Overview
 description: High-level architecture and technology used in the Mystery Inc Enterprise IT & Security Lab.
 date: 2026-09-05
+tags:
+  - portfolio
+  - architecture
 ---
 
 The Mystery Inc Enterprise IT & Security Lab runs locally on an Arch Linux host using KVM/QEMU and libvirt. OPNsense provides routing and firewall segmentation between separate CORP, DMZ, SECURITY, and ATTACK networks.
 
 ## Architecture
+The intended baseline of the lab.
 
 
 ```mermaid

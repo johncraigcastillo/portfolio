@@ -96,19 +96,6 @@ article img {
   cursor: zoom-in;
 }
 
-/* Large portfolio skills graph */
-
-.graph-outer {
-  width: 100%;
-  height: 70vh;
-  min-height: 600px;
-  margin-top: 1.5rem;
-}
-
-.graph-container {
-  width: 100%;
-  height: 100%;
-}
 
 /* Click-to-zoom images */
 
@@ -190,7 +177,31 @@ pre * {
 }
 
 
+/* Quartz 5 modern TOC indentation with wrapped-line alignment */
 
+.toc-content .depth-0 {
+  padding-left: 0;
+}
+
+.toc-content .depth-1 {
+  padding-left: 1rem;
+}
+
+.toc-content .depth-2 {
+  padding-left: 2rem;
+}
+
+.toc-content .depth-3 {
+  padding-left: 3rem;
+}
+
+.toc-content .depth-4 {
+  padding-left: 4rem;
+}
+
+.toc-content .depth-5 {
+  padding-left: 5rem;
+}
 
 
 
