@@ -463,4 +463,4 @@ During DHCP testing, running `dhcpcd` inside the temporary network namespace une
 ## Next Step
 The CORP network is now ready to support infrastructure systems.
 
-The next note will configure and validate the broader CORP firewall and inter-segment access policy before rebuilding DC01 and WKSTN01.
+The next entry will configure and validate the broader CORP firewall and inter-segment access policy before rebuilding DC01 and WKSTN01.
