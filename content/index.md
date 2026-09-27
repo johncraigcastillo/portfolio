@@ -3,15 +3,15 @@ title: John Craig Castillo
 description: IT support, systems administration, and cybersecurity portfolio.
 ---
 
-**IT Support · Systems Administration · Cybersecurity**
+**IT Support · Systems & Security · AI Automation**
 
-I document hands-on work in enterprise infrastructure, Windows and Linux administration, networking, identity management, automation, and security operations.
+I build and document hands-on projects involving enterprise IT, cybersecurity, AI integration, and workflow automation.
 
 > [!info] Featured Project
 >
 > ## District Staff Onboarding AI Orchestrator
 >
-> A local employee-onboarding platform built to demonstrate practical experience with:
+> I built a local onboarding workflow that connects Frappe HR, Moodle, and Zammad through their APIs. It reads an HR request, applies defined rules, prepares an AI-assisted explanation, and requires human approval before creating a training enrollment and IT ticket.
 >
 > - Python application development and API integration
 > - Frappe HR, Moodle, and Zammad
@@ -28,7 +28,7 @@ I document hands-on work in enterprise infrastructure, Windows and Linux adminis
 >
 > ## Mystery Inc Enterprise IT & Security Lab
 >
-> A segmented enterprise home-lab environment built to develop practical experience with:
+> I’m building a segmented home lab to practice how enterprise systems fit together. It gives me a place to work with Windows Server, Active Directory, Linux, networking, OPNsense, backups, and security monitoring
 >
 > - Windows Server and Active Directory
 > - Linux administration
@@ -48,12 +48,12 @@ I document hands-on work in enterprise infrastructure, Windows and Linux adminis
 
 ### Systems Administration
 
-- Active Directory
-- Windows Server
-- Linux administration
-- DNS / DHCP
-- PowerShell
-- Networking
+- Windows Server & Active Directory
+- Linux Administration
+- Identify and access
+- DNS, DHCP, and networking
+- Endpoint Support
+- Documentation and troubleshooting
 
 </div>
 
@@ -63,10 +63,22 @@ I document hands-on work in enterprise infrastructure, Windows and Linux adminis
 
 - Security monitoring
 - Incident response
-- Detection engineering
-- Vulnerability management
 - Endpoint security
-- Packet analysis
+- Network analysis
+- Defensive testing
+
+</div>
+
+<div class="focus-card">
+
+### AI Automation and Integration
+
+- Python applications and APIs
+- Workflow design
+- Data validation
+- Human review and approval
+- AI output evaluation
+- Monitoring and recovery
 
 </div>
 
@@ -74,10 +86,11 @@ I document hands-on work in enterprise infrastructure, Windows and Linux adminis
 
 ## About
 
-I currently work in application support and am building practical experience in systems administration, infrastructure, and cybersecurity through an authorized enterprise home lab.
+I currently support K–12 customers as an application support technician. Previously, I was the sole on-site IT support specialist for a school serving more than 350 users. Those roles have given me firsthand experience with the everyday problems that technology teams need to solve clearly and reliably.
 
-My current focus is Windows Server, Active Directory, Linux administration, networking, PowerShell, and security operations.
+I have a B.S. in Cybersecurity and Information Assurance. Through my projects, I’m developing the skills to build secure integrations and useful automation while continuing to grow in systems administration and security.
 
 ## Links
 
 - [LinkedIn](https://www.linkedin.com/in/johncraigc)
+- [GitHub](https://github.com/johncraigcastillo)
