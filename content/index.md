@@ -8,6 +8,24 @@ description: IT support, systems administration, and cybersecurity portfolio.
 I document hands-on work in enterprise infrastructure, Windows and Linux administration, networking, identity management, automation, and security operations.
 
 > [!info] Featured Project
+>
+> ## District Staff Onboarding AI Orchestrator
+>
+> A local employee-onboarding platform built to demonstrate practical experience with:
+>
+> - Python application development and API integration
+> - Frappe HR, Moodle, and Zammad
+> - Workflow automation and data validation
+> - Policy-based recommendations and human approval
+> - Local AI with structured output validation
+> - Retry handling, reconciliation, and duplicate prevention
+> - Audit logging, health checks, and operational dashboards
+> - Docker Compose and automated testing
+>
+> [[Projects/District Staff Onboarding AI Orchestrator/index|View the project →]]
+
+> [!info] Featured Project
+>
 > ## Mystery Inc Enterprise IT & Security Lab
 >
 > A segmented enterprise home-lab environment built to develop practical experience with:
