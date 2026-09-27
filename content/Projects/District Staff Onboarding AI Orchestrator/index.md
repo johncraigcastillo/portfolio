@@ -79,7 +79,7 @@ The design deliberately separates **recommendation** from **authorization**: det
 
 The project includes **27 automated tests** covering policy, AI response validation, approval gates, duplicate delivery, API behavior, logging, and retry/reconciliation. The local end-to-end demo uses real Frappe, Moodle, and Zammad APIs with fictional records.
 
-An evaluation compared two prompt approaches over 24 fictional cases. Prompt-only outputs failed the validation contract on all 24 cases. Supplying the deterministic policy result and a constrained response schema produced 24 valid grounded outputs. This measures structured contract following; it does not establish independent policy reasoning. See the [evaluation report](evaluation.md) and stored [recovery evidence](recovery-evidence.json) for the measured results and partial-failure retry scenario.
+An evaluation compared two prompt approaches over 24 fictional cases. Prompt-only outputs failed the validation contract on all 24 cases. Supplying the deterministic policy result and a constrained response schema produced 24 valid grounded outputs. This measures structured contract following; it does not establish independent policy reasoning. See the evaluation report and stored recovery evidence in the repository for the measured results and partial-failure retry scenario.
 
 ## Technology
 
