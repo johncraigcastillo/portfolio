@@ -345,7 +345,7 @@ The next step is to validate the configuration by connecting a temporary client 
 
 ### 8. Validated CORP DHCP with a temporary client
 
-To verify DHCP before rebuilding WKSTN01, I created a temporary Linux network namespace connected to `virbr-corp`.
+To verify DHCP before rebuilding WKSTN01 or DC01, I created a temporary Linux network namespace connected to `virbr-corp`.
 
 The test client successfully received:
 
@@ -365,7 +365,7 @@ leased 10.10.10.125 for 86400 seconds
 adding default route via 10.10.10.1
 ```
 
-This confirmed that OPNsense was successfully providing DHCP on CORP and assigning addresses from the intended pool.
+This confirmed that OPNsense was providing DHCP on CORP and assigning addresses from the intended pool.
 
 I then tested connectivity to the gateway:
 
@@ -430,6 +430,81 @@ Device "ctest-h" does not exist.
 
 No temporary test namespace or veth interface remained on the host.
 
+## State of the Lab
+```mermaid
+---
+config:
+  theme: base
+  themeVariables:
+    darkMode: true
+    background: "#1a1b26"
+    primaryColor: "#24283b"
+    primaryTextColor: "#c0caf5"
+    primaryBorderColor: "#7aa2f7"
+    lineColor: "#7aa2f7"
+    edgeLabelBackground: "#24283b"
+    textColor: "#7dcfff"
+---
+flowchart TB
+
+INET(["Host NAT / Internet"])
+
+WAN("default<br/>WAN network<br/>DHCP")
+WANBR[["default bridge"]]
+
+OP{{"OPNsense<br/>Firewall / Router"}}
+
+CORP("soc-corp<br/>CORP<br/>10.10.10.0/24<br/>DHCP: .100-.199")
+DMZ("soc-dmz<br/>DMZ<br/>10.10.20.0/24")
+SEC("soc-security<br/>SECURITY<br/>10.10.30.0/24")
+ATK("soc-attack<br/>ATTACK<br/>10.10.40.0/24")
+
+CORPBR[["virbr-corp<br/>Host: 10.10.10.2/24"]]
+DMZBR[["virbr-dmz"]]
+SECBR[["virbr-security"]]
+ATKBR[["virbr-attack"]]
+
+DC["DC01<br/>Windows Server<br/>AD DS + DNS<br/>✕ NOT REBUILT YET"]
+WK["WKSTN01<br/>Windows 11<br/>✕ NOT REBUILT YET"]
+WEB["WEB01<br/>Ubuntu Server"]
+KALI["KALI01<br/>Kali Linux"]
+
+INET --> WAN
+WAN --> WANBR
+WANBR --> OP
+
+OP -->|"10.10.10.1/24"| CORP
+CORP --> CORPBR
+CORPBR -.-> DC
+CORPBR -.-> WK
+
+OP --> DMZ
+DMZ --> DMZBR
+DMZBR --> WEB
+
+OP --> SEC
+SEC --> SECBR
+
+OP --> ATK
+ATK --> ATKBR
+ATKBR --> KALI
+
+classDef internet fill:#24283b,stroke:#e0af68,color:#c0caf5,stroke-width:1.5px;
+classDef firewall fill:#24283b,stroke:#9d7cd8,color:#c0caf5,stroke-width:2px;
+classDef network fill:#24283b,stroke:#7aa2f7,color:#c0caf5,stroke-width:1.5px;
+classDef bridge fill:#24283b,stroke:#9ece6a,color:#c0caf5,stroke-width:1.5px;
+classDef endpoint fill:#24283b,stroke:#9d7cd8,color:#c0caf5,stroke-width:1.5px;
+classDef removed fill:#3a3424,stroke:#e0af68,color:#e0af68,stroke-width:1.5px,stroke-dasharray:5 5;
+
+class INET internet;
+class OP firewall;
+class WAN,CORP,DMZ,SEC,ATK network;
+class WANBR,CORPBR,DMZBR,SECBR,ATKBR bridge;
+class WEB,KALI endpoint;
+class DC,WK removed;
+```
+At the end of this step, the CORP network was back in place and connected to OPNsense. DHCP and gateway access were working, while DC01 and WKSTN01 were intentionally left out so they could be rebuilt separately in the next phase.
+
 ## Verification
 I confirmed the rebuilt CORP network was working by validating each layer:
 
@@ -462,5 +537,7 @@ During DHCP testing, running `dhcpcd` inside the temporary network namespace une
 
 ## Next Step
 The CORP network is now ready to support infrastructure systems.
+The next entry will address rebuilding DC01.
 
-The next entry will configure and validate the broader CORP firewall and inter-segment access policy before rebuilding DC01 and WKSTN01.
+> [!info] Next Entry
+> [[05 - Rebuilding DC01]]

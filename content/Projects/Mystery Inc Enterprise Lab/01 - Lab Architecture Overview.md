@@ -10,8 +10,8 @@ tags:
 The Mystery Inc Enterprise IT & Security Lab runs locally on an Arch Linux host using KVM/QEMU and libvirt. OPNsense provides routing and firewall segmentation between separate CORP, DMZ, SECURITY, and ATTACK networks.
 
 ## Architecture
-The intended baseline of the lab.
 
+The intended baseline of the lab.
 
 ```mermaid
 ---
@@ -92,7 +92,6 @@ class SPLUNK security;
 | Automation                | PowerShell, Bash, Python               |
 | Network analysis          | Wireshark                              |
 | Future network monitoring | Suricata, Zeek                         |
-
 
 ## Design Notes
 

@@ -6,7 +6,9 @@ status: draft
 tags:
   - portfolio
 ---
+
 ## Context
+
 During the first build of DC01 and WKSTN01, I completed much of the setup using PowerShell and command-line tools.
 
 Although the environment worked, I realized I was relying on commands faster than I was understanding the underlying Windows administration concepts. I decided to remove both systems and rebuild them using the graphical management tools first.
@@ -16,7 +18,9 @@ Although the environment worked, I realized I was relying on commands faster tha
 The goal of the rebuild is to get more comfortable with the Windows Server and Active Directory interfaces and understand where settings are located. In this note, I am documenting the removal of the existing DC01 and WKSTN01 virtual machines before rebuilding them separately.
 
 ## Environment
+
 See [[01 - Lab Architecture Overview]] for more detail.
+
 - Systems involved: DC01, WKSTN01
 - Network / segment: CORP — 10.10.10.0/24
 - Virtualization: KVM/QEMU, libvirt, virsh
@@ -29,7 +33,7 @@ See [[01 - Lab Architecture Overview]] for more detail.
 Confirmed that the existing DC01 backup was preserved before removing the active Windows virtual machines.
 
 ```sh
-❯ /mnt/ssk-ssd ❯ eza -T backups                                                    
+❯ /mnt/ssk-ssd ❯ eza -T backups
 backups
 ├── DC01-Mystery-Inc-audit-baseline-20260830
 │   ├── DC01.qcow2
@@ -44,6 +48,7 @@ backups
 ```
 
 The backup set contains the main pieces needed to recover the virtual machine:
+
 - `DC01.qcow2` - the VM's virtual hard drive. It contains Windows Server, installed roles, configuration, and data.
 - `DC01.xml` - the libvirt configuration that describes how the VM is built, including CPU, memory, disks, firmware, and network interfaces.
 - `DC01_VARS.fd` - the VM's saved UEFI firmware state, including boot-related settings.
@@ -52,8 +57,8 @@ The backup set contains the main pieces needed to recover the virtual machine:
 
 I didn't bother creating a backup of WKSTN01. Soon after joining it to the domain, I decided to walk through DC01 again.
 
-
 ### 2. Confirmed both VMs are shut down
+
 Before making any destructive changes, I confirmed that both Windows virtual machines were powered off.
 
 ```sh
@@ -68,10 +73,11 @@ Before making any destructive changes, I confirmed that both Windows virtual mac
 ```
 
 ### 3. Verified their attached storage paths
+
 I checked the attached disks so I knew exactly which active virtual disk files belonged to DC01 and WKSTN01 before removing anything.
 
 ```sh
-❯ virsh -c qemu:///system domblklist DC01                         
+❯ virsh -c qemu:///system domblklist DC01
 ❯ virsh -c qemu:///system domblklist WKSTN01
 
  Target   Source
@@ -98,6 +104,7 @@ Domain 'WKSTN01' has been undefined
 ```
 
 I confirmed that DC01 and WKSTN01 no longer appeared in libvirt before deleting their active virtual disks.
+
 ```sh
 ❯ virsh -c qemu:///system list --all
  Id   Name       State
@@ -108,13 +115,16 @@ I confirmed that DC01 and WKSTN01 no longer appeared in libvirt before deleting 
 ```
 
 ### 5. Removed the active virtual disks
+
 I deleted the DC01 and WKSTN01 virtual disks from internal storage.
 
 ```sh
 ❯ sudo rm /var/lib/libvirt/images/DC01.qcow2
 ❯ sudo rm /var/lib/libvirt/images/WKSTN01.qcow2
 ```
+
 Then confirmed removal.
+
 ```sh
 ❯ eza -T /var/lib/libvirt/images
 /var/lib/libvirt/images
@@ -125,6 +135,7 @@ Then confirmed removal.
 ```
 
 ### 6. Verified lab networks preserved
+
 I confirmed that removing DC01 and WKSTN01 did not affect the existing libvirt networks used by the lab. (DC01 and WKSTN01 existed on soc-corp)
 
 ```sh
@@ -137,7 +148,6 @@ I confirmed that removing DC01 and WKSTN01 did not affect the existing libvirt n
  soc-dmz        active   yes         yes
  soc-security   active   yes         yes
 ```
-
 
 ## Verification
 
@@ -216,7 +226,6 @@ class CORP,DMZ,SEC,ATK network;
 class WEB,KALI endpoint;
 class DC,WK removed;
 ```
-
 
 ## Next Step
 
