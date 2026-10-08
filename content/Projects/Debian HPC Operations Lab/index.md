@@ -9,19 +9,30 @@ The goal was to get hands-on experience with the technologies used to manage HPC
 ## Architecture
 
 ```mermaid
+---
+config:
+  flowchart:
+    curve: stepAfter
+---
 flowchart TD
     H["Arch Linux Host<br/>KVM/QEMU + libvirt"]
-    C["hpc-controller<br/>Debian 13<br/>SLURM Controller + NFS Server"]
-    W1["compute01<br/>Debian 13<br/>SLURM Worker"]
-    W2["compute02<br/>Debian 13<br/>SLURM Worker"]
 
-    H --> C
-    H --> W1
-    H --> W2
-    C -->|"Job Scheduling"| W1
-    C -->|"Job Scheduling"| W2
-    C -.->|"NFS Shared Storage"| W1
-    C -.->|"NFS Shared Storage"| W2
+    subgraph CLUSTER["Debian 13 HPC Cluster"]
+        direction TB
+
+        C["hpc-controller<br/>SLURM Controller<br/>NFS Server"]
+
+        W1["compute01<br/>SLURM Worker<br/>NFS Client"]
+        W2["compute02<br/>SLURM Worker<br/>NFS Client"]
+
+        C -->|"SLURM Scheduling"| W1
+        C -->|"SLURM Scheduling"| W2
+
+        C <-.->|"NFS Read/Write"| W1
+        C <-.->|"NFS Read/Write"| W2
+    end
+
+    H -->|"Hosts Virtual Machines"| CLUSTER
 ```
 
 ## What it demonstrates
