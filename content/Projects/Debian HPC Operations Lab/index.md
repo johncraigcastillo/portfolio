@@ -1,5 +1,3 @@
-# Debian HPC Operations Lab
-
 **A three-node Debian high-performance computing (HPC) lab built to practice Linux systems administration, SLURM job scheduling, shared storage, troubleshooting, and cluster maintenance.**
 
 ## Overview

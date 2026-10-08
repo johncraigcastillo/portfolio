@@ -9,6 +9,25 @@ I build and document hands-on projects involving enterprise IT, cybersecurity, A
 
 > [!info] Featured Project
 >
+> ## Debian HPC Operations Lab
+>
+> I built a three-node Debian HPC cluster using KVM/QEMU and libvirt to practice Linux administration and high-performance computing operations. The lab uses SLURM for job scheduling, MUNGE for authentication, and NFS for shared storage. I tested job scheduling, resource allocation, service failure recovery, and planned node maintenance.
+>
+> - Linux server administration and troubleshooting
+> - Debian 13, KVM/QEMU, and libvirt
+> - SLURM workload scheduling and resource management
+> - MUNGE authentication between cluster nodes
+> - NFS shared storage configuration
+> - SSH, networking, and systemd service management
+> - Job monitoring, queue management, and cancellation
+> - Service failure investigation and recovery
+> - Node draining, reboot procedures, and maintenance verification
+> - Bash scripting and Python workload testing
+>
+> [[Projects/Debian HPC Operations Lab/index|View the project →]]
+
+> [!info] Featured Project
+>
 > ## District Staff Onboarding AI Orchestrator
 >
 > I built a local onboarding workflow that connects Frappe HR, Moodle, and Zammad through their APIs. It reads an HR request, applies defined rules, prepares an AI-assisted explanation, and requires human approval before creating a training enrollment and IT ticket.
