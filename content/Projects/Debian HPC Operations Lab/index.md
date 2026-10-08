@@ -17,22 +17,18 @@ config:
 flowchart TD
     H["Arch Linux Host<br/>KVM/QEMU + libvirt"]
 
-    subgraph CLUSTER["Debian 13 HPC Cluster"]
-        direction TB
+    C["hpc-controller<br/>Debian 13<br/>SLURM Controller + NFS Server"]
 
-        C["hpc-controller<br/>SLURM Controller<br/>NFS Server"]
+    W1["compute01<br/>Debian 13<br/>SLURM Worker + NFS Client"]
+    W2["compute02<br/>Debian 13<br/>SLURM Worker + NFS Client"]
 
-        W1["compute01<br/>SLURM Worker<br/>NFS Client"]
-        W2["compute02<br/>SLURM Worker<br/>NFS Client"]
+    H -->|"Hosts Virtual Machines"| C
 
-        C -->|"SLURM Scheduling"| W1
-        C -->|"SLURM Scheduling"| W2
+    C -->|"SLURM Scheduling"| W1
+    C -->|"SLURM Scheduling"| W2
 
-        C <-.->|"NFS Read/Write"| W1
-        C <-.->|"NFS Read/Write"| W2
-    end
-
-    H -->|"Hosts Virtual Machines"| CLUSTER
+    C <-.->|"NFS Read/Write"| W1
+    C <-.->|"NFS Read/Write"| W2
 ```
 
 ## What it demonstrates
